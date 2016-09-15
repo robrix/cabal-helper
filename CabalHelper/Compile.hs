@@ -150,7 +150,7 @@ compileHelper opts cabalVer projdir distdir = withHelperSources $ \chdir -> do
 compile :: FilePath -> Options -> Compile -> IO (Either ExitCode FilePath)
 compile distdir opts@Options {..} Compile {..} = do
     cCabalSourceDir <- canonicalizePath `traverse` compCabalSourceDir
-    appdir <- appDataDir
+    appdir <- appCacheDir
 
     let outdir' = maybe appdir (const $ distdir </> "cabal-helper") cCabalSourceDir
     createDirectoryIfMissing True outdir'
@@ -205,7 +205,7 @@ compile distdir opts@Options {..} Compile {..} = do
 
 exePath :: Either String Version -> IO FilePath
 exePath compCabalVersion = do
-    exePath' compCabalVersion <$> appDataDir
+    exePath' compCabalVersion <$> appCacheDir
 
 exePath' :: Either String Version -> FilePath -> FilePath
 exePath' (Left commitid) outdir =
@@ -236,7 +236,7 @@ processFailedException fn exe args rv =
 
 installCabal :: Options -> Version -> IO FilePath
 installCabal opts ver = do
-  appdir <- appDataDir
+  appdir <- appCacheDir
   let sver = showVersion ver
   hPutStr stderr $ printf "\
 \cabal-helper-wrapper: Installing a private copy of Cabal because we couldn't\n\
@@ -458,7 +458,7 @@ createPkgDb opts@Options {..} ver = do
 
 getPrivateCabalPkgDb :: Options -> String -> IO FilePath
 getPrivateCabalPkgDb opts ver = do
-  appdir <- appDataDir
+  appdir <- appCacheDir
   ghcVer <- ghcVersion opts
   return $ appdir </> "Cabal-" ++ ver ++ "-db-" ++ showVersion ghcVer
 
