@@ -118,6 +118,7 @@ isExeScopePrivate exe =
 onlyExePackageDesc :: [Executable] -> PackageDescription -> PackageDescription
 onlyExePackageDesc exes pd = emptyPackageDescription {
                      package = package pd
+                   , library = library pd
                    , executables = exes
                    }
 
