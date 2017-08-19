@@ -21,6 +21,7 @@ import Distribution.Simple.BuildPaths
 import qualified Distribution.Simple.InstallDirs as ID
 import Distribution.Simple.LocalBuildInfo
 import Distribution.Simple.Program
+import Distribution.Types.UnqualComponentName
 import Distribution.PackageDescription
 
 import qualified Data.Map as M
@@ -96,9 +97,9 @@ xInstallTarget pd lbi cf fn = do
         copydest  = fromFlag (copyDest cf)
         verbosity = fromFlag (copyVerbosity cf)
         InstallDirs { bindir, libexecdir } = absoluteInstallDirs pd lbi' copydest
-        progprefix = substPathTemplate (packageId pd) lbi (progPrefix lbi)
-        progsuffix = substPathTemplate (packageId pd) lbi (progSuffix lbi)
-        fixedExeBaseName = progprefix ++ exeName exe ++ progsuffix
+        progprefix = substPathTemplate (packageId pd) lbi (localUnitId lbi) (progPrefix lbi)
+        progsuffix = substPathTemplate (packageId pd) lbi (localUnitId lbi) (progSuffix lbi)
+        fixedExeBaseName = progprefix ++ unUnqualComponentName (exeName exe) ++ progsuffix
 
         fixedExeFileName = bindir </> fixedExeBaseName <.> exeExtension
         newExeFileName   = libexecdir </> fixedExeBaseName <.> exeExtension
