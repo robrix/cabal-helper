@@ -35,7 +35,7 @@ import Prelude
 import Distribution.System (buildPlatform)
 import Distribution.Text (display)
 import Distribution.Verbosity (silent, deafening)
-import Distribution.PackageDescription.Parse (readPackageDescription)
+import Distribution.PackageDescription.Parse (readGenericPackageDescription)
 import Distribution.Package (packageName, packageVersion)
 
 import Paths_cabal_helper (version)
