@@ -124,7 +124,7 @@ main = handlePanic $ do
       v <- maybe silent (const deafening) . lookup  "GHC_MOD_DEBUG" <$> getEnvironment
       -- ghc-mod will catch multiple cabal files existing before we get here
       [cfile] <- filter isCabalFile <$> getDirectoryContents projdir
-      gpd <- readPackageDescription v (projdir </> cfile)
+      gpd <- readGenericPackageDescription v (projdir </> cfile)
       putStrLn $ show $
         [Just $ ChResponseVersion (display (packageName gpd)) (toDataVersion $ packageVersion gpd)]
 
