@@ -83,7 +83,6 @@ executable cabal-helper-wrapper
                        CabalHelper.Sandbox
                        CabalHelper.Compat.Version
   ghc-options:         -Wall
-  scope:               private
   x-scope:             private
   build-depends:       base             < 5    && >= 4.5
                      , Cabal            < 2.2  && >= 2.0     || < 1.26 && >= 1.14
