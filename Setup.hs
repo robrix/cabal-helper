@@ -99,7 +99,7 @@ xInstallTarget pd lbi cf fn = do
         InstallDirs { bindir, libexecdir } = absoluteInstallDirs pd lbi' copydest
         progprefix = substPathTemplate (packageId pd) lbi (localUnitId lbi) (progPrefix lbi)
         progsuffix = substPathTemplate (packageId pd) lbi (localUnitId lbi) (progSuffix lbi)
-        fixedExeBaseName = progprefix ++ unUnqualComponentName (exeName exe) ++ progsuffix
+        fixedExeBaseName = progprefix ++ display (exeName exe) ++ progsuffix
 
         fixedExeFileName = bindir </> fixedExeBaseName <.> exeExtension
         newExeFileName   = libexecdir </> fixedExeBaseName <.> exeExtension
