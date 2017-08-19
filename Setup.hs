@@ -21,8 +21,8 @@ import Distribution.Simple.BuildPaths
 import qualified Distribution.Simple.InstallDirs as ID
 import Distribution.Simple.LocalBuildInfo
 import Distribution.Simple.Program
-import Distribution.Types.UnqualComponentName
 import Distribution.PackageDescription
+import Distribution.Text
 
 import qualified Data.Map as M
 import Data.Map (Map)
